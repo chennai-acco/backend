@@ -1,7 +1,27 @@
+# import * from "./generated/prisma.graphql"
+
 type Query {
-  hi: String
+  viewer: Viewer
 }
 
 type Mutation {
-  hi: String
+  # Authentication
+  signup(
+    email: String!
+    password: String!
+    firstName: String!
+    lastName: String!
+    phone: String!
+  ): AuthPayload!
+  login(email: String!, password: String!): AuthPayload!
+}
+
+type AuthPayload {
+  token: String!
+  user: User!
+}
+
+type Viewer {
+  me: User!
+  bookings: [Booking!]!
 }
