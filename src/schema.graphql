@@ -4,6 +4,7 @@ type Query {
   viewer: Viewer
   places: [Place]!
   place(where: PlaceWhereUniqueInput!): Place
+  me: User
 }
 
 type Mutation {
