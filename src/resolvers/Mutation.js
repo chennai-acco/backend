@@ -1,5 +1,6 @@
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
+const { forwardTo } = require('prisma-binding')
 
 const mutations = {
   async signup(parent, args, ctx) {
@@ -33,7 +34,44 @@ const mutations = {
       token,
       user
     }
-  }
+  },
+
+  async createProperty(parent, args, ctx, info) {
+    const { data } = args
+    const { amenities, pricing, location, host, ...rest } = data
+
+    const result = await ctx.db.mutation.createPlace(
+      {
+        data: {
+          ...rest,
+          host: {
+            connect: {
+              id: host
+            }
+          },
+          amenities: {
+            create: {
+              ...amenities
+            }
+          },
+          pricing: {
+            create: {
+              ...pricing
+            }
+          },
+          location: {
+            create: {
+              ...location
+            }
+          }
+        }
+      },
+      info
+    )
+    return result
+  },
+
+  createPicture: forwardTo('db')
 }
 
 module.exports = mutations

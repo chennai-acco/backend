@@ -1,5 +1,5 @@
 # source: https://eu1.prisma.sh/vimalraj-selvam-a2323f/chennai-acco-backend/dev
-# timestamp: Thu Oct 25 2018 05:56:16 GMT+0800 (Singapore Standard Time)
+# timestamp: Sun Oct 28 2018 21:11:26 GMT+0800 (Singapore Standard Time)
 
 type AggregateAmenities {
   count: Int!
@@ -465,6 +465,49 @@ input AmenitiesUpdateInput {
   place: PlaceUpdateOneRequiredWithoutAmenitiesInput
 }
 
+input AmenitiesUpdateManyInput {
+  elevator: Boolean
+  petsAllowed: Boolean
+  internet: Boolean
+  kitchen: Boolean
+  wirelessInternet: Boolean
+  familyKidFriendly: Boolean
+  freeParkingOnPremises: Boolean
+  hotTub: Boolean
+  pool: Boolean
+  smokingAllowed: Boolean
+  wheelchairAccessible: Boolean
+  breakfast: Boolean
+  cableTv: Boolean
+  suitableForEvents: Boolean
+  dryer: Boolean
+  washer: Boolean
+  indoorFireplace: Boolean
+  tv: Boolean
+  heating: Boolean
+  hangers: Boolean
+  iron: Boolean
+  hairDryer: Boolean
+  doorman: Boolean
+  paidParkingOffPremises: Boolean
+  freeParkingOnStreet: Boolean
+  gym: Boolean
+  airConditioning: Boolean
+  shampoo: Boolean
+  essentials: Boolean
+  laptopFriendlyWorkspace: Boolean
+  privateEntrance: Boolean
+  buzzerWirelessIntercom: Boolean
+  babyBath: Boolean
+  babyMonitor: Boolean
+  babysitterRecommendations: Boolean
+  bathtub: Boolean
+  changingTable: Boolean
+  childrensBooksAndToys: Boolean
+  childrensDinnerware: Boolean
+  crib: Boolean
+}
+
 input AmenitiesUpdateOneRequiredWithoutPlaceInput {
   create: AmenitiesCreateWithoutPlaceInput
   connect: AmenitiesWhereUniqueInput
@@ -881,6 +924,11 @@ input BookingUpdateInput {
   payment: PaymentUpdateOneWithoutBookingInput
 }
 
+input BookingUpdateManyInput {
+  startDate: DateTime
+  endDate: DateTime
+}
+
 input BookingUpdateManyWithoutBookeeInput {
   create: [BookingCreateWithoutBookeeInput!]
   connect: [BookingWhereUniqueInput!]
@@ -1177,6 +1225,10 @@ input CityUpdateInput {
   neighbourhoods: NeighbourhoodUpdateManyWithoutCityInput
 }
 
+input CityUpdateManyInput {
+  name: String
+}
+
 input CityUpdateOneRequiredWithoutNeighbourhoodsInput {
   create: CityCreateWithoutNeighbourhoodsInput
   connect: CityWhereUniqueInput
@@ -1439,6 +1491,17 @@ input CreditCardInformationUpdateInput {
   postalCode: String
   country: String
   paymentAccount: PaymentAccountUpdateOneWithoutCreditcardInput
+}
+
+input CreditCardInformationUpdateManyInput {
+  cardNumber: String
+  expiresOnMonth: Int
+  expiresOnYear: Int
+  securityCode: String
+  firstName: String
+  lastName: String
+  postalCode: String
+  country: String
 }
 
 input CreditCardInformationUpdateOneWithoutPaymentAccountInput {
@@ -1829,12 +1892,8 @@ input CreditCardInformationWhereUniqueInput {
 }
 
 enum CURRENCY {
-  CAD
-  CHF
-  EUR
-  JPY
+  INR
   USD
-  ZAR
 }
 
 scalar DateTime
@@ -1955,6 +2014,11 @@ input ExperienceCategoryUpdateInput {
   mainColor: String
   name: String
   experience: ExperienceUpdateOneWithoutCategoryInput
+}
+
+input ExperienceCategoryUpdateManyInput {
+  mainColor: String
+  name: String
 }
 
 input ExperienceCategoryUpdateOneWithoutExperienceInput {
@@ -2272,6 +2336,12 @@ input ExperienceUpdateInput {
   location: LocationUpdateOneRequiredWithoutExperienceInput
   reviews: ReviewUpdateManyWithoutExperienceInput
   preview: PictureUpdateOneRequiredInput
+}
+
+input ExperienceUpdateManyInput {
+  title: String
+  pricePerPerson: Int
+  popularity: Int
 }
 
 input ExperienceUpdateManyWithoutHostInput {
@@ -2635,6 +2705,12 @@ input GuestRequirementsUpdateInput {
   place: PlaceUpdateOneRequiredWithoutGuestRequirementsInput
 }
 
+input GuestRequirementsUpdateManyInput {
+  govIssuedId: Boolean
+  recommendationsFromOtherHosts: Boolean
+  guestTripInformation: Boolean
+}
+
 input GuestRequirementsUpdateOneWithoutPlaceInput {
   create: GuestRequirementsCreateWithoutPlaceInput
   connect: GuestRequirementsWhereUniqueInput
@@ -2850,6 +2926,15 @@ input HouseRulesUpdateDataInput {
 }
 
 input HouseRulesUpdateInput {
+  suitableForChildren: Boolean
+  suitableForInfants: Boolean
+  petsAllowed: Boolean
+  smokingAllowed: Boolean
+  partiesAndEventsAllowed: Boolean
+  additionalRules: String
+}
+
+input HouseRulesUpdateManyInput {
   suitableForChildren: Boolean
   suitableForInfants: Boolean
   petsAllowed: Boolean
@@ -3229,6 +3314,13 @@ input LocationUpdateInput {
   place: PlaceUpdateOneWithoutLocationInput
   experience: ExperienceUpdateOneWithoutLocationInput
   restaurant: RestaurantUpdateOneWithoutLocationInput
+}
+
+input LocationUpdateManyInput {
+  lat: Float
+  lng: Float
+  address: String
+  directions: String
 }
 
 input LocationUpdateManyWithoutNeighbourHoodInput {
@@ -3669,6 +3761,11 @@ input MessageUpdateInput {
   to: UserUpdateOneRequiredWithoutReceivedMessagesInput
 }
 
+input MessageUpdateManyInput {
+  deliveredAt: DateTime
+  readAt: DateTime
+}
+
 input MessageUpdateManyWithoutFromInput {
   create: [MessageCreateWithoutFromInput!]
   connect: [MessageWhereUniqueInput!]
@@ -3937,29 +4034,29 @@ type Mutation {
   upsertRestaurant(where: RestaurantWhereUniqueInput!, create: RestaurantCreateInput!, update: RestaurantUpdateInput!): Restaurant!
   upsertPicture(where: PictureWhereUniqueInput!, create: PictureCreateInput!, update: PictureUpdateInput!): Picture!
   upsertHouseRules(where: HouseRulesWhereUniqueInput!, create: HouseRulesCreateInput!, update: HouseRulesUpdateInput!): HouseRules!
-  updateManyUsers(data: UserUpdateInput!, where: UserWhereInput): BatchPayload!
-  updateManyPlaces(data: PlaceUpdateInput!, where: PlaceWhereInput): BatchPayload!
-  updateManyPricings(data: PricingUpdateInput!, where: PricingWhereInput): BatchPayload!
-  updateManyGuestRequirementses(data: GuestRequirementsUpdateInput!, where: GuestRequirementsWhereInput): BatchPayload!
-  updateManyPolicieses(data: PoliciesUpdateInput!, where: PoliciesWhereInput): BatchPayload!
-  updateManyViewses(data: ViewsUpdateInput!, where: ViewsWhereInput): BatchPayload!
-  updateManyLocations(data: LocationUpdateInput!, where: LocationWhereInput): BatchPayload!
-  updateManyNeighbourhoods(data: NeighbourhoodUpdateInput!, where: NeighbourhoodWhereInput): BatchPayload!
-  updateManyCities(data: CityUpdateInput!, where: CityWhereInput): BatchPayload!
-  updateManyExperiences(data: ExperienceUpdateInput!, where: ExperienceWhereInput): BatchPayload!
-  updateManyExperienceCategories(data: ExperienceCategoryUpdateInput!, where: ExperienceCategoryWhereInput): BatchPayload!
-  updateManyAmenitieses(data: AmenitiesUpdateInput!, where: AmenitiesWhereInput): BatchPayload!
-  updateManyReviews(data: ReviewUpdateInput!, where: ReviewWhereInput): BatchPayload!
-  updateManyBookings(data: BookingUpdateInput!, where: BookingWhereInput): BatchPayload!
-  updateManyPayments(data: PaymentUpdateInput!, where: PaymentWhereInput): BatchPayload!
-  updateManyPaymentAccounts(data: PaymentAccountUpdateInput!, where: PaymentAccountWhereInput): BatchPayload!
-  updateManyPaypalInformations(data: PaypalInformationUpdateInput!, where: PaypalInformationWhereInput): BatchPayload!
-  updateManyCreditCardInformations(data: CreditCardInformationUpdateInput!, where: CreditCardInformationWhereInput): BatchPayload!
-  updateManyMessages(data: MessageUpdateInput!, where: MessageWhereInput): BatchPayload!
-  updateManyNotifications(data: NotificationUpdateInput!, where: NotificationWhereInput): BatchPayload!
-  updateManyRestaurants(data: RestaurantUpdateInput!, where: RestaurantWhereInput): BatchPayload!
-  updateManyPictures(data: PictureUpdateInput!, where: PictureWhereInput): BatchPayload!
-  updateManyHouseRuleses(data: HouseRulesUpdateInput!, where: HouseRulesWhereInput): BatchPayload!
+  updateManyUsers(data: UserUpdateManyInput!, where: UserWhereInput): BatchPayload!
+  updateManyPlaces(data: PlaceUpdateManyInput!, where: PlaceWhereInput): BatchPayload!
+  updateManyPricings(data: PricingUpdateManyInput!, where: PricingWhereInput): BatchPayload!
+  updateManyGuestRequirementses(data: GuestRequirementsUpdateManyInput!, where: GuestRequirementsWhereInput): BatchPayload!
+  updateManyPolicieses(data: PoliciesUpdateManyInput!, where: PoliciesWhereInput): BatchPayload!
+  updateManyViewses(data: ViewsUpdateManyInput!, where: ViewsWhereInput): BatchPayload!
+  updateManyLocations(data: LocationUpdateManyInput!, where: LocationWhereInput): BatchPayload!
+  updateManyNeighbourhoods(data: NeighbourhoodUpdateManyInput!, where: NeighbourhoodWhereInput): BatchPayload!
+  updateManyCities(data: CityUpdateManyInput!, where: CityWhereInput): BatchPayload!
+  updateManyExperiences(data: ExperienceUpdateManyInput!, where: ExperienceWhereInput): BatchPayload!
+  updateManyExperienceCategories(data: ExperienceCategoryUpdateManyInput!, where: ExperienceCategoryWhereInput): BatchPayload!
+  updateManyAmenitieses(data: AmenitiesUpdateManyInput!, where: AmenitiesWhereInput): BatchPayload!
+  updateManyReviews(data: ReviewUpdateManyInput!, where: ReviewWhereInput): BatchPayload!
+  updateManyBookings(data: BookingUpdateManyInput!, where: BookingWhereInput): BatchPayload!
+  updateManyPayments(data: PaymentUpdateManyInput!, where: PaymentWhereInput): BatchPayload!
+  updateManyPaymentAccounts(data: PaymentAccountUpdateManyInput!, where: PaymentAccountWhereInput): BatchPayload!
+  updateManyPaypalInformations(data: PaypalInformationUpdateManyInput!, where: PaypalInformationWhereInput): BatchPayload!
+  updateManyCreditCardInformations(data: CreditCardInformationUpdateManyInput!, where: CreditCardInformationWhereInput): BatchPayload!
+  updateManyMessages(data: MessageUpdateManyInput!, where: MessageWhereInput): BatchPayload!
+  updateManyNotifications(data: NotificationUpdateManyInput!, where: NotificationWhereInput): BatchPayload!
+  updateManyRestaurants(data: RestaurantUpdateManyInput!, where: RestaurantWhereInput): BatchPayload!
+  updateManyPictures(data: PictureUpdateManyInput!, where: PictureWhereInput): BatchPayload!
+  updateManyHouseRuleses(data: HouseRulesUpdateManyInput!, where: HouseRulesWhereInput): BatchPayload!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
   deleteManyPlaces(where: PlaceWhereInput): BatchPayload!
   deleteManyPricings(where: PricingWhereInput): BatchPayload!
@@ -4131,6 +4228,13 @@ input NeighbourhoodUpdateInput {
   locations: LocationUpdateManyWithoutNeighbourHoodInput
   homePreview: PictureUpdateOneInput
   city: CityUpdateOneRequiredWithoutNeighbourhoodsInput
+}
+
+input NeighbourhoodUpdateManyInput {
+  name: String
+  slug: String
+  featured: Boolean
+  popularity: Int
 }
 
 input NeighbourhoodUpdateManyWithoutCityInput {
@@ -4478,6 +4582,12 @@ input NotificationUpdateInput {
   link: String
   readDate: DateTime
   user: UserUpdateOneRequiredWithoutNotificationsInput
+}
+
+input NotificationUpdateManyInput {
+  type: NOTIFICATION_TYPE
+  link: String
+  readDate: DateTime
 }
 
 input NotificationUpdateManyWithoutUserInput {
@@ -4835,6 +4945,10 @@ input PaymentAccountUpdateInput {
   creditcard: CreditCardInformationUpdateOneWithoutPaymentAccountInput
 }
 
+input PaymentAccountUpdateManyInput {
+  type: PAYMENT_PROVIDER
+}
+
 input PaymentAccountUpdateManyWithoutUserInput {
   create: [PaymentAccountCreateWithoutUserInput!]
   connect: [PaymentAccountWhereUniqueInput!]
@@ -5135,6 +5249,12 @@ input PaymentUpdateInput {
   paymentMethod: PaymentAccountUpdateOneRequiredWithoutPaymentsInput
 }
 
+input PaymentUpdateManyInput {
+  serviceFee: Float
+  placePrice: Float
+  totalPrice: Float
+}
+
 input PaymentUpdateManyWithoutPaymentMethodInput {
   create: [PaymentCreateWithoutPaymentMethodInput!]
   connect: [PaymentWhereUniqueInput!]
@@ -5429,6 +5549,10 @@ input PaypalInformationUpdateInput {
   paymentAccount: PaymentAccountUpdateOneRequiredWithoutPaypalInput
 }
 
+input PaypalInformationUpdateManyInput {
+  email: String
+}
+
 input PaypalInformationUpdateOneWithoutPaymentAccountInput {
   create: PaypalInformationCreateWithoutPaymentAccountInput
   connect: PaypalInformationWhereUniqueInput
@@ -5568,6 +5692,7 @@ input PaypalInformationWhereUniqueInput {
 type Picture implements Node {
   id: ID!
   url: String!
+  place: Place!
 }
 
 """A connection to a list of items."""
@@ -5582,6 +5707,7 @@ type PictureConnection {
 
 input PictureCreateInput {
   url: String!
+  place: PlaceCreateOneWithoutPicturesInput!
 }
 
 input PictureCreateManyInput {
@@ -5589,9 +5715,18 @@ input PictureCreateManyInput {
   connect: [PictureWhereUniqueInput!]
 }
 
+input PictureCreateManyWithoutPlaceInput {
+  create: [PictureCreateWithoutPlaceInput!]
+  connect: [PictureWhereUniqueInput!]
+}
+
 input PictureCreateOneInput {
   create: PictureCreateInput
   connect: PictureWhereUniqueInput
+}
+
+input PictureCreateWithoutPlaceInput {
+  url: String!
 }
 
 """An edge in a connection."""
@@ -5660,10 +5795,12 @@ input PictureSubscriptionWhereInput {
 
 input PictureUpdateDataInput {
   url: String
+  place: PlaceUpdateOneRequiredWithoutPicturesInput
 }
 
 input PictureUpdateInput {
   url: String
+  place: PlaceUpdateOneRequiredWithoutPicturesInput
 }
 
 input PictureUpdateManyInput {
@@ -5673,6 +5810,15 @@ input PictureUpdateManyInput {
   delete: [PictureWhereUniqueInput!]
   update: [PictureUpdateWithWhereUniqueNestedInput!]
   upsert: [PictureUpsertWithWhereUniqueNestedInput!]
+}
+
+input PictureUpdateManyWithoutPlaceInput {
+  create: [PictureCreateWithoutPlaceInput!]
+  connect: [PictureWhereUniqueInput!]
+  disconnect: [PictureWhereUniqueInput!]
+  delete: [PictureWhereUniqueInput!]
+  update: [PictureUpdateWithWhereUniqueWithoutPlaceInput!]
+  upsert: [PictureUpsertWithWhereUniqueWithoutPlaceInput!]
 }
 
 input PictureUpdateOneInput {
@@ -5691,9 +5837,18 @@ input PictureUpdateOneRequiredInput {
   upsert: PictureUpsertNestedInput
 }
 
+input PictureUpdateWithoutPlaceDataInput {
+  url: String
+}
+
 input PictureUpdateWithWhereUniqueNestedInput {
   where: PictureWhereUniqueInput!
   data: PictureUpdateDataInput!
+}
+
+input PictureUpdateWithWhereUniqueWithoutPlaceInput {
+  where: PictureWhereUniqueInput!
+  data: PictureUpdateWithoutPlaceDataInput!
 }
 
 input PictureUpsertNestedInput {
@@ -5705,6 +5860,12 @@ input PictureUpsertWithWhereUniqueNestedInput {
   where: PictureWhereUniqueInput!
   update: PictureUpdateDataInput!
   create: PictureCreateInput!
+}
+
+input PictureUpsertWithWhereUniqueWithoutPlaceInput {
+  where: PictureWhereUniqueInput!
+  update: PictureUpdateWithoutPlaceDataInput!
+  create: PictureCreateWithoutPlaceInput!
 }
 
 input PictureWhereInput {
@@ -5796,6 +5957,7 @@ input PictureWhereInput {
 
   """All values not ending with the given string."""
   url_not_ends_with: String
+  place: PlaceWhereInput
 }
 
 input PictureWhereUniqueInput {
@@ -5808,7 +5970,7 @@ type Place implements Node {
   size: PLACE_SIZES
   shortDescription: String!
   description: String!
-  slug: String!
+  slug: String
   maxGuests: Int!
   numBedrooms: Int!
   numBeds: Int!
@@ -5818,7 +5980,7 @@ type Place implements Node {
   host: User!
   pricing: Pricing!
   location: Location!
-  views: Views!
+  views: Views
   guestRequirements: GuestRequirements
   policies: Policies
   houseRules: HouseRules
@@ -5853,7 +6015,7 @@ input PlaceCreateInput {
   size: PLACE_SIZES
   shortDescription: String!
   description: String!
-  slug: String!
+  slug: String
   maxGuests: Int!
   numBedrooms: Int!
   numBeds: Int!
@@ -5864,12 +6026,12 @@ input PlaceCreateInput {
   host: UserCreateOneWithoutOwnedPlacesInput!
   pricing: PricingCreateOneWithoutPlaceInput!
   location: LocationCreateOneWithoutPlaceInput!
-  views: ViewsCreateOneWithoutPlaceInput!
+  views: ViewsCreateOneWithoutPlaceInput
   guestRequirements: GuestRequirementsCreateOneWithoutPlaceInput
   policies: PoliciesCreateOneWithoutPlaceInput
   houseRules: HouseRulesCreateOneInput
   bookings: BookingCreateManyWithoutPlaceInput
-  pictures: PictureCreateManyInput
+  pictures: PictureCreateManyWithoutPlaceInput
 }
 
 input PlaceCreateManyWithoutHostInput {
@@ -5894,6 +6056,11 @@ input PlaceCreateOneWithoutGuestRequirementsInput {
 
 input PlaceCreateOneWithoutLocationInput {
   create: PlaceCreateWithoutLocationInput
+  connect: PlaceWhereUniqueInput
+}
+
+input PlaceCreateOneWithoutPicturesInput {
+  create: PlaceCreateWithoutPicturesInput
   connect: PlaceWhereUniqueInput
 }
 
@@ -5922,7 +6089,7 @@ input PlaceCreateWithoutAmenitiesInput {
   size: PLACE_SIZES
   shortDescription: String!
   description: String!
-  slug: String!
+  slug: String
   maxGuests: Int!
   numBedrooms: Int!
   numBeds: Int!
@@ -5932,12 +6099,12 @@ input PlaceCreateWithoutAmenitiesInput {
   host: UserCreateOneWithoutOwnedPlacesInput!
   pricing: PricingCreateOneWithoutPlaceInput!
   location: LocationCreateOneWithoutPlaceInput!
-  views: ViewsCreateOneWithoutPlaceInput!
+  views: ViewsCreateOneWithoutPlaceInput
   guestRequirements: GuestRequirementsCreateOneWithoutPlaceInput
   policies: PoliciesCreateOneWithoutPlaceInput
   houseRules: HouseRulesCreateOneInput
   bookings: BookingCreateManyWithoutPlaceInput
-  pictures: PictureCreateManyInput
+  pictures: PictureCreateManyWithoutPlaceInput
 }
 
 input PlaceCreateWithoutBookingsInput {
@@ -5945,7 +6112,7 @@ input PlaceCreateWithoutBookingsInput {
   size: PLACE_SIZES
   shortDescription: String!
   description: String!
-  slug: String!
+  slug: String
   maxGuests: Int!
   numBedrooms: Int!
   numBeds: Int!
@@ -5956,11 +6123,11 @@ input PlaceCreateWithoutBookingsInput {
   host: UserCreateOneWithoutOwnedPlacesInput!
   pricing: PricingCreateOneWithoutPlaceInput!
   location: LocationCreateOneWithoutPlaceInput!
-  views: ViewsCreateOneWithoutPlaceInput!
+  views: ViewsCreateOneWithoutPlaceInput
   guestRequirements: GuestRequirementsCreateOneWithoutPlaceInput
   policies: PoliciesCreateOneWithoutPlaceInput
   houseRules: HouseRulesCreateOneInput
-  pictures: PictureCreateManyInput
+  pictures: PictureCreateManyWithoutPlaceInput
 }
 
 input PlaceCreateWithoutGuestRequirementsInput {
@@ -5968,7 +6135,7 @@ input PlaceCreateWithoutGuestRequirementsInput {
   size: PLACE_SIZES
   shortDescription: String!
   description: String!
-  slug: String!
+  slug: String
   maxGuests: Int!
   numBedrooms: Int!
   numBeds: Int!
@@ -5979,11 +6146,11 @@ input PlaceCreateWithoutGuestRequirementsInput {
   host: UserCreateOneWithoutOwnedPlacesInput!
   pricing: PricingCreateOneWithoutPlaceInput!
   location: LocationCreateOneWithoutPlaceInput!
-  views: ViewsCreateOneWithoutPlaceInput!
+  views: ViewsCreateOneWithoutPlaceInput
   policies: PoliciesCreateOneWithoutPlaceInput
   houseRules: HouseRulesCreateOneInput
   bookings: BookingCreateManyWithoutPlaceInput
-  pictures: PictureCreateManyInput
+  pictures: PictureCreateManyWithoutPlaceInput
 }
 
 input PlaceCreateWithoutHostInput {
@@ -5991,7 +6158,7 @@ input PlaceCreateWithoutHostInput {
   size: PLACE_SIZES
   shortDescription: String!
   description: String!
-  slug: String!
+  slug: String
   maxGuests: Int!
   numBedrooms: Int!
   numBeds: Int!
@@ -6001,12 +6168,12 @@ input PlaceCreateWithoutHostInput {
   amenities: AmenitiesCreateOneWithoutPlaceInput!
   pricing: PricingCreateOneWithoutPlaceInput!
   location: LocationCreateOneWithoutPlaceInput!
-  views: ViewsCreateOneWithoutPlaceInput!
+  views: ViewsCreateOneWithoutPlaceInput
   guestRequirements: GuestRequirementsCreateOneWithoutPlaceInput
   policies: PoliciesCreateOneWithoutPlaceInput
   houseRules: HouseRulesCreateOneInput
   bookings: BookingCreateManyWithoutPlaceInput
-  pictures: PictureCreateManyInput
+  pictures: PictureCreateManyWithoutPlaceInput
 }
 
 input PlaceCreateWithoutLocationInput {
@@ -6014,7 +6181,7 @@ input PlaceCreateWithoutLocationInput {
   size: PLACE_SIZES
   shortDescription: String!
   description: String!
-  slug: String!
+  slug: String
   maxGuests: Int!
   numBedrooms: Int!
   numBeds: Int!
@@ -6024,12 +6191,35 @@ input PlaceCreateWithoutLocationInput {
   amenities: AmenitiesCreateOneWithoutPlaceInput!
   host: UserCreateOneWithoutOwnedPlacesInput!
   pricing: PricingCreateOneWithoutPlaceInput!
-  views: ViewsCreateOneWithoutPlaceInput!
+  views: ViewsCreateOneWithoutPlaceInput
   guestRequirements: GuestRequirementsCreateOneWithoutPlaceInput
   policies: PoliciesCreateOneWithoutPlaceInput
   houseRules: HouseRulesCreateOneInput
   bookings: BookingCreateManyWithoutPlaceInput
-  pictures: PictureCreateManyInput
+  pictures: PictureCreateManyWithoutPlaceInput
+}
+
+input PlaceCreateWithoutPicturesInput {
+  name: String!
+  size: PLACE_SIZES
+  shortDescription: String!
+  description: String!
+  slug: String
+  maxGuests: Int!
+  numBedrooms: Int!
+  numBeds: Int!
+  numBaths: Int!
+  popularity: Int!
+  reviews: ReviewCreateManyWithoutPlaceInput
+  amenities: AmenitiesCreateOneWithoutPlaceInput!
+  host: UserCreateOneWithoutOwnedPlacesInput!
+  pricing: PricingCreateOneWithoutPlaceInput!
+  location: LocationCreateOneWithoutPlaceInput!
+  views: ViewsCreateOneWithoutPlaceInput
+  guestRequirements: GuestRequirementsCreateOneWithoutPlaceInput
+  policies: PoliciesCreateOneWithoutPlaceInput
+  houseRules: HouseRulesCreateOneInput
+  bookings: BookingCreateManyWithoutPlaceInput
 }
 
 input PlaceCreateWithoutPoliciesInput {
@@ -6037,7 +6227,7 @@ input PlaceCreateWithoutPoliciesInput {
   size: PLACE_SIZES
   shortDescription: String!
   description: String!
-  slug: String!
+  slug: String
   maxGuests: Int!
   numBedrooms: Int!
   numBeds: Int!
@@ -6048,11 +6238,11 @@ input PlaceCreateWithoutPoliciesInput {
   host: UserCreateOneWithoutOwnedPlacesInput!
   pricing: PricingCreateOneWithoutPlaceInput!
   location: LocationCreateOneWithoutPlaceInput!
-  views: ViewsCreateOneWithoutPlaceInput!
+  views: ViewsCreateOneWithoutPlaceInput
   guestRequirements: GuestRequirementsCreateOneWithoutPlaceInput
   houseRules: HouseRulesCreateOneInput
   bookings: BookingCreateManyWithoutPlaceInput
-  pictures: PictureCreateManyInput
+  pictures: PictureCreateManyWithoutPlaceInput
 }
 
 input PlaceCreateWithoutPricingInput {
@@ -6060,7 +6250,7 @@ input PlaceCreateWithoutPricingInput {
   size: PLACE_SIZES
   shortDescription: String!
   description: String!
-  slug: String!
+  slug: String
   maxGuests: Int!
   numBedrooms: Int!
   numBeds: Int!
@@ -6070,12 +6260,12 @@ input PlaceCreateWithoutPricingInput {
   amenities: AmenitiesCreateOneWithoutPlaceInput!
   host: UserCreateOneWithoutOwnedPlacesInput!
   location: LocationCreateOneWithoutPlaceInput!
-  views: ViewsCreateOneWithoutPlaceInput!
+  views: ViewsCreateOneWithoutPlaceInput
   guestRequirements: GuestRequirementsCreateOneWithoutPlaceInput
   policies: PoliciesCreateOneWithoutPlaceInput
   houseRules: HouseRulesCreateOneInput
   bookings: BookingCreateManyWithoutPlaceInput
-  pictures: PictureCreateManyInput
+  pictures: PictureCreateManyWithoutPlaceInput
 }
 
 input PlaceCreateWithoutReviewsInput {
@@ -6083,7 +6273,7 @@ input PlaceCreateWithoutReviewsInput {
   size: PLACE_SIZES
   shortDescription: String!
   description: String!
-  slug: String!
+  slug: String
   maxGuests: Int!
   numBedrooms: Int!
   numBeds: Int!
@@ -6093,12 +6283,12 @@ input PlaceCreateWithoutReviewsInput {
   host: UserCreateOneWithoutOwnedPlacesInput!
   pricing: PricingCreateOneWithoutPlaceInput!
   location: LocationCreateOneWithoutPlaceInput!
-  views: ViewsCreateOneWithoutPlaceInput!
+  views: ViewsCreateOneWithoutPlaceInput
   guestRequirements: GuestRequirementsCreateOneWithoutPlaceInput
   policies: PoliciesCreateOneWithoutPlaceInput
   houseRules: HouseRulesCreateOneInput
   bookings: BookingCreateManyWithoutPlaceInput
-  pictures: PictureCreateManyInput
+  pictures: PictureCreateManyWithoutPlaceInput
 }
 
 input PlaceCreateWithoutViewsInput {
@@ -6106,7 +6296,7 @@ input PlaceCreateWithoutViewsInput {
   size: PLACE_SIZES
   shortDescription: String!
   description: String!
-  slug: String!
+  slug: String
   maxGuests: Int!
   numBedrooms: Int!
   numBeds: Int!
@@ -6121,7 +6311,7 @@ input PlaceCreateWithoutViewsInput {
   policies: PoliciesCreateOneWithoutPlaceInput
   houseRules: HouseRulesCreateOneInput
   bookings: BookingCreateManyWithoutPlaceInput
-  pictures: PictureCreateManyInput
+  pictures: PictureCreateManyWithoutPlaceInput
 }
 
 """An edge in a connection."""
@@ -6168,7 +6358,7 @@ type PlacePreviousValues {
   size: PLACE_SIZES
   shortDescription: String!
   description: String!
-  slug: String!
+  slug: String
   maxGuests: Int!
   numBedrooms: Int!
   numBeds: Int!
@@ -6231,12 +6421,25 @@ input PlaceUpdateInput {
   host: UserUpdateOneRequiredWithoutOwnedPlacesInput
   pricing: PricingUpdateOneRequiredWithoutPlaceInput
   location: LocationUpdateOneRequiredWithoutPlaceInput
-  views: ViewsUpdateOneRequiredWithoutPlaceInput
+  views: ViewsUpdateOneWithoutPlaceInput
   guestRequirements: GuestRequirementsUpdateOneWithoutPlaceInput
   policies: PoliciesUpdateOneWithoutPlaceInput
   houseRules: HouseRulesUpdateOneInput
   bookings: BookingUpdateManyWithoutPlaceInput
-  pictures: PictureUpdateManyInput
+  pictures: PictureUpdateManyWithoutPlaceInput
+}
+
+input PlaceUpdateManyInput {
+  name: String
+  size: PLACE_SIZES
+  shortDescription: String
+  description: String
+  slug: String
+  maxGuests: Int
+  numBedrooms: Int
+  numBeds: Int
+  numBaths: Int
+  popularity: Int
 }
 
 input PlaceUpdateManyWithoutHostInput {
@@ -6267,6 +6470,13 @@ input PlaceUpdateOneRequiredWithoutGuestRequirementsInput {
   connect: PlaceWhereUniqueInput
   update: PlaceUpdateWithoutGuestRequirementsDataInput
   upsert: PlaceUpsertWithoutGuestRequirementsInput
+}
+
+input PlaceUpdateOneRequiredWithoutPicturesInput {
+  create: PlaceCreateWithoutPicturesInput
+  connect: PlaceWhereUniqueInput
+  update: PlaceUpdateWithoutPicturesDataInput
+  upsert: PlaceUpsertWithoutPicturesInput
 }
 
 input PlaceUpdateOneRequiredWithoutPoliciesInput {
@@ -6321,12 +6531,12 @@ input PlaceUpdateWithoutAmenitiesDataInput {
   host: UserUpdateOneRequiredWithoutOwnedPlacesInput
   pricing: PricingUpdateOneRequiredWithoutPlaceInput
   location: LocationUpdateOneRequiredWithoutPlaceInput
-  views: ViewsUpdateOneRequiredWithoutPlaceInput
+  views: ViewsUpdateOneWithoutPlaceInput
   guestRequirements: GuestRequirementsUpdateOneWithoutPlaceInput
   policies: PoliciesUpdateOneWithoutPlaceInput
   houseRules: HouseRulesUpdateOneInput
   bookings: BookingUpdateManyWithoutPlaceInput
-  pictures: PictureUpdateManyInput
+  pictures: PictureUpdateManyWithoutPlaceInput
 }
 
 input PlaceUpdateWithoutBookingsDataInput {
@@ -6345,11 +6555,11 @@ input PlaceUpdateWithoutBookingsDataInput {
   host: UserUpdateOneRequiredWithoutOwnedPlacesInput
   pricing: PricingUpdateOneRequiredWithoutPlaceInput
   location: LocationUpdateOneRequiredWithoutPlaceInput
-  views: ViewsUpdateOneRequiredWithoutPlaceInput
+  views: ViewsUpdateOneWithoutPlaceInput
   guestRequirements: GuestRequirementsUpdateOneWithoutPlaceInput
   policies: PoliciesUpdateOneWithoutPlaceInput
   houseRules: HouseRulesUpdateOneInput
-  pictures: PictureUpdateManyInput
+  pictures: PictureUpdateManyWithoutPlaceInput
 }
 
 input PlaceUpdateWithoutGuestRequirementsDataInput {
@@ -6368,11 +6578,11 @@ input PlaceUpdateWithoutGuestRequirementsDataInput {
   host: UserUpdateOneRequiredWithoutOwnedPlacesInput
   pricing: PricingUpdateOneRequiredWithoutPlaceInput
   location: LocationUpdateOneRequiredWithoutPlaceInput
-  views: ViewsUpdateOneRequiredWithoutPlaceInput
+  views: ViewsUpdateOneWithoutPlaceInput
   policies: PoliciesUpdateOneWithoutPlaceInput
   houseRules: HouseRulesUpdateOneInput
   bookings: BookingUpdateManyWithoutPlaceInput
-  pictures: PictureUpdateManyInput
+  pictures: PictureUpdateManyWithoutPlaceInput
 }
 
 input PlaceUpdateWithoutHostDataInput {
@@ -6390,12 +6600,12 @@ input PlaceUpdateWithoutHostDataInput {
   amenities: AmenitiesUpdateOneRequiredWithoutPlaceInput
   pricing: PricingUpdateOneRequiredWithoutPlaceInput
   location: LocationUpdateOneRequiredWithoutPlaceInput
-  views: ViewsUpdateOneRequiredWithoutPlaceInput
+  views: ViewsUpdateOneWithoutPlaceInput
   guestRequirements: GuestRequirementsUpdateOneWithoutPlaceInput
   policies: PoliciesUpdateOneWithoutPlaceInput
   houseRules: HouseRulesUpdateOneInput
   bookings: BookingUpdateManyWithoutPlaceInput
-  pictures: PictureUpdateManyInput
+  pictures: PictureUpdateManyWithoutPlaceInput
 }
 
 input PlaceUpdateWithoutLocationDataInput {
@@ -6413,12 +6623,35 @@ input PlaceUpdateWithoutLocationDataInput {
   amenities: AmenitiesUpdateOneRequiredWithoutPlaceInput
   host: UserUpdateOneRequiredWithoutOwnedPlacesInput
   pricing: PricingUpdateOneRequiredWithoutPlaceInput
-  views: ViewsUpdateOneRequiredWithoutPlaceInput
+  views: ViewsUpdateOneWithoutPlaceInput
   guestRequirements: GuestRequirementsUpdateOneWithoutPlaceInput
   policies: PoliciesUpdateOneWithoutPlaceInput
   houseRules: HouseRulesUpdateOneInput
   bookings: BookingUpdateManyWithoutPlaceInput
-  pictures: PictureUpdateManyInput
+  pictures: PictureUpdateManyWithoutPlaceInput
+}
+
+input PlaceUpdateWithoutPicturesDataInput {
+  name: String
+  size: PLACE_SIZES
+  shortDescription: String
+  description: String
+  slug: String
+  maxGuests: Int
+  numBedrooms: Int
+  numBeds: Int
+  numBaths: Int
+  popularity: Int
+  reviews: ReviewUpdateManyWithoutPlaceInput
+  amenities: AmenitiesUpdateOneRequiredWithoutPlaceInput
+  host: UserUpdateOneRequiredWithoutOwnedPlacesInput
+  pricing: PricingUpdateOneRequiredWithoutPlaceInput
+  location: LocationUpdateOneRequiredWithoutPlaceInput
+  views: ViewsUpdateOneWithoutPlaceInput
+  guestRequirements: GuestRequirementsUpdateOneWithoutPlaceInput
+  policies: PoliciesUpdateOneWithoutPlaceInput
+  houseRules: HouseRulesUpdateOneInput
+  bookings: BookingUpdateManyWithoutPlaceInput
 }
 
 input PlaceUpdateWithoutPoliciesDataInput {
@@ -6437,11 +6670,11 @@ input PlaceUpdateWithoutPoliciesDataInput {
   host: UserUpdateOneRequiredWithoutOwnedPlacesInput
   pricing: PricingUpdateOneRequiredWithoutPlaceInput
   location: LocationUpdateOneRequiredWithoutPlaceInput
-  views: ViewsUpdateOneRequiredWithoutPlaceInput
+  views: ViewsUpdateOneWithoutPlaceInput
   guestRequirements: GuestRequirementsUpdateOneWithoutPlaceInput
   houseRules: HouseRulesUpdateOneInput
   bookings: BookingUpdateManyWithoutPlaceInput
-  pictures: PictureUpdateManyInput
+  pictures: PictureUpdateManyWithoutPlaceInput
 }
 
 input PlaceUpdateWithoutPricingDataInput {
@@ -6459,12 +6692,12 @@ input PlaceUpdateWithoutPricingDataInput {
   amenities: AmenitiesUpdateOneRequiredWithoutPlaceInput
   host: UserUpdateOneRequiredWithoutOwnedPlacesInput
   location: LocationUpdateOneRequiredWithoutPlaceInput
-  views: ViewsUpdateOneRequiredWithoutPlaceInput
+  views: ViewsUpdateOneWithoutPlaceInput
   guestRequirements: GuestRequirementsUpdateOneWithoutPlaceInput
   policies: PoliciesUpdateOneWithoutPlaceInput
   houseRules: HouseRulesUpdateOneInput
   bookings: BookingUpdateManyWithoutPlaceInput
-  pictures: PictureUpdateManyInput
+  pictures: PictureUpdateManyWithoutPlaceInput
 }
 
 input PlaceUpdateWithoutReviewsDataInput {
@@ -6482,12 +6715,12 @@ input PlaceUpdateWithoutReviewsDataInput {
   host: UserUpdateOneRequiredWithoutOwnedPlacesInput
   pricing: PricingUpdateOneRequiredWithoutPlaceInput
   location: LocationUpdateOneRequiredWithoutPlaceInput
-  views: ViewsUpdateOneRequiredWithoutPlaceInput
+  views: ViewsUpdateOneWithoutPlaceInput
   guestRequirements: GuestRequirementsUpdateOneWithoutPlaceInput
   policies: PoliciesUpdateOneWithoutPlaceInput
   houseRules: HouseRulesUpdateOneInput
   bookings: BookingUpdateManyWithoutPlaceInput
-  pictures: PictureUpdateManyInput
+  pictures: PictureUpdateManyWithoutPlaceInput
 }
 
 input PlaceUpdateWithoutViewsDataInput {
@@ -6510,7 +6743,7 @@ input PlaceUpdateWithoutViewsDataInput {
   policies: PoliciesUpdateOneWithoutPlaceInput
   houseRules: HouseRulesUpdateOneInput
   bookings: BookingUpdateManyWithoutPlaceInput
-  pictures: PictureUpdateManyInput
+  pictures: PictureUpdateManyWithoutPlaceInput
 }
 
 input PlaceUpdateWithWhereUniqueWithoutHostInput {
@@ -6536,6 +6769,11 @@ input PlaceUpsertWithoutGuestRequirementsInput {
 input PlaceUpsertWithoutLocationInput {
   update: PlaceUpdateWithoutLocationDataInput!
   create: PlaceCreateWithoutLocationInput!
+}
+
+input PlaceUpsertWithoutPicturesInput {
+  update: PlaceUpdateWithoutPicturesDataInput!
+  create: PlaceCreateWithoutPicturesInput!
 }
 
 input PlaceUpsertWithoutPoliciesInput {
@@ -7033,6 +7271,12 @@ input PoliciesUpdateInput {
   place: PlaceUpdateOneRequiredWithoutPoliciesInput
 }
 
+input PoliciesUpdateManyInput {
+  checkInStartTime: Float
+  checkInEndTime: Float
+  checkoutTime: Float
+}
+
 input PoliciesUpdateOneWithoutPlaceInput {
   create: PoliciesCreateWithoutPlaceInput
   connect: PoliciesWhereUniqueInput
@@ -7226,9 +7470,9 @@ type Pricing implements Node {
   weeklyDiscount: Int
   perNight: Int!
   smartPricing: Boolean!
-  basePrice: Int!
-  averageWeekly: Int!
-  averageMonthly: Int!
+  basePrice: Int
+  averageWeekly: Int
+  averageMonthly: Int
   cleaningFee: Int
   securityDeposit: Int
   extraGuests: Int
@@ -7251,9 +7495,9 @@ input PricingCreateInput {
   weeklyDiscount: Int
   perNight: Int!
   smartPricing: Boolean
-  basePrice: Int!
-  averageWeekly: Int!
-  averageMonthly: Int!
+  basePrice: Int
+  averageWeekly: Int
+  averageMonthly: Int
   cleaningFee: Int
   securityDeposit: Int
   extraGuests: Int
@@ -7272,9 +7516,9 @@ input PricingCreateWithoutPlaceInput {
   weeklyDiscount: Int
   perNight: Int!
   smartPricing: Boolean
-  basePrice: Int!
-  averageWeekly: Int!
-  averageMonthly: Int!
+  basePrice: Int
+  averageWeekly: Int
+  averageMonthly: Int
   cleaningFee: Int
   securityDeposit: Int
   extraGuests: Int
@@ -7330,9 +7574,9 @@ type PricingPreviousValues {
   weeklyDiscount: Int
   perNight: Int!
   smartPricing: Boolean!
-  basePrice: Int!
-  averageWeekly: Int!
-  averageMonthly: Int!
+  basePrice: Int
+  averageWeekly: Int
+  averageMonthly: Int
   cleaningFee: Int
   securityDeposit: Int
   extraGuests: Int
@@ -7393,6 +7637,21 @@ input PricingUpdateInput {
   weekendPricing: Int
   currency: CURRENCY
   place: PlaceUpdateOneRequiredWithoutPricingInput
+}
+
+input PricingUpdateManyInput {
+  monthlyDiscount: Int
+  weeklyDiscount: Int
+  perNight: Int
+  smartPricing: Boolean
+  basePrice: Int
+  averageWeekly: Int
+  averageMonthly: Int
+  cleaningFee: Int
+  securityDeposit: Int
+  extraGuests: Int
+  weekendPricing: Int
+  currency: CURRENCY
 }
 
 input PricingUpdateOneRequiredWithoutPlaceInput {
@@ -7923,6 +8182,14 @@ input RestaurantUpdateInput {
   location: LocationUpdateOneRequiredWithoutRestaurantInput
 }
 
+input RestaurantUpdateManyInput {
+  title: String
+  avgPricePerPerson: Int
+  isCurated: Boolean
+  slug: String
+  popularity: Int
+}
+
 input RestaurantUpdateOneWithoutLocationInput {
   create: RestaurantCreateWithoutLocationInput
   connect: RestaurantWhereUniqueInput
@@ -8324,6 +8591,17 @@ input ReviewUpdateInput {
   communication: Int
   place: PlaceUpdateOneRequiredWithoutReviewsInput
   experience: ExperienceUpdateOneWithoutReviewsInput
+}
+
+input ReviewUpdateManyInput {
+  text: String
+  stars: Int
+  accuracy: Int
+  location: Int
+  checkIn: Int
+  value: Int
+  cleanliness: Int
+  communication: Int
 }
 
 input ReviewUpdateManyWithoutExperienceInput {
@@ -9039,6 +9317,17 @@ input UserUpdateInput {
   notifications: NotificationUpdateManyWithoutUserInput
   profilePicture: PictureUpdateOneInput
   hostingExperiences: ExperienceUpdateManyWithoutHostInput
+}
+
+input UserUpdateManyInput {
+  firstName: String
+  lastName: String
+  email: String
+  password: String
+  phone: String
+  responseRate: Float
+  responseTime: Int
+  isSuperHost: Boolean
 }
 
 input UserUpdateOneRequiredWithoutBookingsInput {
@@ -9761,9 +10050,15 @@ input ViewsUpdateInput {
   place: PlaceUpdateOneRequiredWithoutViewsInput
 }
 
-input ViewsUpdateOneRequiredWithoutPlaceInput {
+input ViewsUpdateManyInput {
+  lastWeek: Int
+}
+
+input ViewsUpdateOneWithoutPlaceInput {
   create: ViewsCreateWithoutPlaceInput
   connect: ViewsWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
   update: ViewsUpdateWithoutPlaceDataInput
   upsert: ViewsUpsertWithoutPlaceInput
 }

@@ -27,7 +27,7 @@ type Place {
   size: PLACE_SIZES
   shortDescription: String!
   description: String!
-  slug: String!
+  slug: String
   maxGuests: Int!
   numBedrooms: Int!
   numBeds: Int!
@@ -37,7 +37,7 @@ type Place {
   host: User!
   pricing: Pricing!
   location: Location!
-  views: Views!
+  views: Views
   guestRequirements: GuestRequirements
   policies: Policies
   houseRules: HouseRules
@@ -53,9 +53,9 @@ type Pricing {
   weeklyDiscount: Int
   perNight: Int!
   smartPricing: Boolean! @default(value: "false")
-  basePrice: Int!
-  averageWeekly: Int!
-  averageMonthly: Int!
+  basePrice: Int
+  averageWeekly: Int
+  averageMonthly: Int
   cleaningFee: Int
   securityDeposit: Int
   extraGuests: Int
@@ -132,6 +132,7 @@ type City {
 type Picture {
   id: ID! @unique
   url: String!
+  place: Place!
 }
 
 type Experience {
@@ -295,12 +296,8 @@ type Restaurant {
 }
 
 enum CURRENCY {
-  CAD
-  CHF
-  EUR
-  JPY
+  INR
   USD
-  ZAR
 }
 
 enum PLACE_SIZES {

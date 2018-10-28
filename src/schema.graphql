@@ -2,6 +2,8 @@
 
 type Query {
   viewer: Viewer
+  places: [Place]!
+  place(where: PlaceWhereUniqueInput!): Place
 }
 
 type Mutation {
@@ -14,6 +16,87 @@ type Mutation {
     phone: String!
   ): AuthPayload!
   login(email: String!, password: String!): AuthPayload!
+  createProperty(data: PropertyInput): Place!
+  createPicture(data: PictureCreateInput!): Picture!
+}
+
+input AmenitiesInput {
+  elevator: Boolean
+  petsAllowed: Boolean
+  internet: Boolean
+  kitchen: Boolean
+  wirelessInternet: Boolean
+  familyKidFriendly: Boolean
+  freeParkingOnPremises: Boolean
+  hotTub: Boolean
+  pool: Boolean
+  smokingAllowed: Boolean
+  wheelchairAccessible: Boolean
+  breakfast: Boolean
+  cableTv: Boolean
+  suitableForEvents: Boolean
+  dryer: Boolean
+  washer: Boolean
+  indoorFireplace: Boolean
+  tv: Boolean
+  heating: Boolean
+  hangers: Boolean
+  iron: Boolean
+  hairDryer: Boolean
+  doorman: Boolean
+  paidParkingOffPremises: Boolean
+  freeParkingOnStreet: Boolean
+  gym: Boolean
+  airConditioning: Boolean
+  shampoo: Boolean
+  essentials: Boolean
+  laptopFriendlyWorkspace: Boolean
+  privateEntrance: Boolean
+  buzzerWirelessIntercom: Boolean
+  babyBath: Boolean
+  babyMonitor: Boolean
+  babysitterRecommendations: Boolean
+  bathtub: Boolean
+  changingTable: Boolean
+  childrensBooksAndToys: Boolean
+  childrensDinnerware: Boolean
+  crib: Boolean
+}
+
+input PricingInput {
+  monthlyDiscount: Int
+  weeklyDiscount: Int
+  perNight: Int!
+  basePrice: Int
+  averageWeekly: Int
+  averageMonthly: Int
+  cleaningFee: Int
+  securityDeposit: Int
+  extraGuests: Int
+  weekendPricing: Int
+  currency: CURRENCY!
+}
+
+input LocationInput {
+  lat: Float!
+  lng: Float!
+  address: String!
+}
+
+input PropertyInput {
+  name: String!
+  size: PLACE_SIZES!
+  shortDescription: String!
+  description: String!
+  maxGuests: Int!
+  numBedrooms: Int!
+  numBeds: Int!
+  numBaths: Int!
+  popularity: Int!
+  host: ID!
+  amenities: AmenitiesInput!
+  location: LocationInput!
+  pricing: PricingInput!
 }
 
 type AuthPayload {

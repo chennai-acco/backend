@@ -1,4 +1,5 @@
 const { getUserId } = require('../utils')
+const { forwardTo } = require('prisma-binding')
 
 const Query = {
   async viewer(parent, args, ctx) {
@@ -19,7 +20,11 @@ const Query = {
       me: user,
       bookings
     }
-  }
+  },
+
+  places: forwardTo('db'),
+
+  place: forwardTo('db')
 }
 
 module.exports = Query
