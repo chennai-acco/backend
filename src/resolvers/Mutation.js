@@ -3,22 +3,30 @@ const jwt = require('jsonwebtoken')
 const { forwardTo } = require('prisma-binding')
 
 const mutations = {
-  async signup(parent, args, ctx) {
+  async signup(parent, args, ctx, info) {
+    args.email = args.email.toLowerCase()
     const password = await bcrypt.hash(args.password, 10)
-    const result = await ctx.db.mutation.createUser({
-      data: {
-        ...args,
-        password,
-        responseRate: 0,
-        responseTime: 0
-      }
-    })
-    const token = jwt.sign({ userId: result.id }, process.env.APP_SECRET)
+    const user = await ctx.db.mutation.createUser(
+      {
+        data: {
+          ...args,
+          password,
+          responseRate: 0,
+          responseTime: 0,
+          permission: { set: ['USER'] }
+        }
+      },
+      info
+    )
+    const token = jwt.sign({ userId: user.id }, process.env.APP_SECRET)
 
-    return {
-      token,
-      user: ctx.db.query.user({ where: { id: result.id } })
-    }
+    // Set the cookie as the response
+    ctx.response.cookie('token', token, {
+      httpOnly: true,
+      maxAge: 1000 * 60 * 60 * 24 * 365 // 1 year cookie
+    })
+
+    return user
   },
 
   async login(parent, { email, password }, ctx) {

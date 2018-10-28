@@ -1,5 +1,5 @@
 # source: https://eu1.prisma.sh/vimalraj-selvam-a2323f/chennai-acco-backend/dev
-# timestamp: Sun Oct 28 2018 21:11:26 GMT+0800 (Singapore Standard Time)
+# timestamp: Sun Oct 28 2018 23:14:21 GMT+0800 (Singapore Standard Time)
 
 type AggregateAmenities {
   count: Int!
@@ -5689,6 +5689,11 @@ input PaypalInformationWhereUniqueInput {
   id: ID
 }
 
+enum PERMISSION {
+  ADMIN
+  USER
+}
+
 type Picture implements Node {
   id: ID!
   url: String!
@@ -8975,6 +8980,9 @@ type User implements Node {
   lastName: String!
   email: String!
   password: String!
+  resetToken: String
+  resetTokenExpiry: String
+  permission: [PERMISSION!]!
   phone: String!
   responseRate: Float
   responseTime: Int
@@ -9005,10 +9013,13 @@ input UserCreateInput {
   lastName: String!
   email: String!
   password: String!
+  resetToken: String
+  resetTokenExpiry: String
   phone: String!
   responseRate: Float
   responseTime: Int
   isSuperHost: Boolean
+  permission: UserCreatepermissionInput
   ownedPlaces: PlaceCreateManyWithoutHostInput
   location: LocationCreateOneWithoutUserInput
   bookings: BookingCreateManyWithoutBookeeInput
@@ -9060,15 +9071,22 @@ input UserCreateOneWithoutSentMessagesInput {
   connect: UserWhereUniqueInput
 }
 
+input UserCreatepermissionInput {
+  set: [PERMISSION!]
+}
+
 input UserCreateWithoutBookingsInput {
   firstName: String!
   lastName: String!
   email: String!
   password: String!
+  resetToken: String
+  resetTokenExpiry: String
   phone: String!
   responseRate: Float
   responseTime: Int
   isSuperHost: Boolean
+  permission: UserCreatepermissionInput
   ownedPlaces: PlaceCreateManyWithoutHostInput
   location: LocationCreateOneWithoutUserInput
   paymentAccount: PaymentAccountCreateManyWithoutUserInput
@@ -9084,10 +9102,13 @@ input UserCreateWithoutHostingExperiencesInput {
   lastName: String!
   email: String!
   password: String!
+  resetToken: String
+  resetTokenExpiry: String
   phone: String!
   responseRate: Float
   responseTime: Int
   isSuperHost: Boolean
+  permission: UserCreatepermissionInput
   ownedPlaces: PlaceCreateManyWithoutHostInput
   location: LocationCreateOneWithoutUserInput
   bookings: BookingCreateManyWithoutBookeeInput
@@ -9103,10 +9124,13 @@ input UserCreateWithoutLocationInput {
   lastName: String!
   email: String!
   password: String!
+  resetToken: String
+  resetTokenExpiry: String
   phone: String!
   responseRate: Float
   responseTime: Int
   isSuperHost: Boolean
+  permission: UserCreatepermissionInput
   ownedPlaces: PlaceCreateManyWithoutHostInput
   bookings: BookingCreateManyWithoutBookeeInput
   paymentAccount: PaymentAccountCreateManyWithoutUserInput
@@ -9122,10 +9146,13 @@ input UserCreateWithoutNotificationsInput {
   lastName: String!
   email: String!
   password: String!
+  resetToken: String
+  resetTokenExpiry: String
   phone: String!
   responseRate: Float
   responseTime: Int
   isSuperHost: Boolean
+  permission: UserCreatepermissionInput
   ownedPlaces: PlaceCreateManyWithoutHostInput
   location: LocationCreateOneWithoutUserInput
   bookings: BookingCreateManyWithoutBookeeInput
@@ -9141,10 +9168,13 @@ input UserCreateWithoutOwnedPlacesInput {
   lastName: String!
   email: String!
   password: String!
+  resetToken: String
+  resetTokenExpiry: String
   phone: String!
   responseRate: Float
   responseTime: Int
   isSuperHost: Boolean
+  permission: UserCreatepermissionInput
   location: LocationCreateOneWithoutUserInput
   bookings: BookingCreateManyWithoutBookeeInput
   paymentAccount: PaymentAccountCreateManyWithoutUserInput
@@ -9160,10 +9190,13 @@ input UserCreateWithoutPaymentAccountInput {
   lastName: String!
   email: String!
   password: String!
+  resetToken: String
+  resetTokenExpiry: String
   phone: String!
   responseRate: Float
   responseTime: Int
   isSuperHost: Boolean
+  permission: UserCreatepermissionInput
   ownedPlaces: PlaceCreateManyWithoutHostInput
   location: LocationCreateOneWithoutUserInput
   bookings: BookingCreateManyWithoutBookeeInput
@@ -9179,10 +9212,13 @@ input UserCreateWithoutReceivedMessagesInput {
   lastName: String!
   email: String!
   password: String!
+  resetToken: String
+  resetTokenExpiry: String
   phone: String!
   responseRate: Float
   responseTime: Int
   isSuperHost: Boolean
+  permission: UserCreatepermissionInput
   ownedPlaces: PlaceCreateManyWithoutHostInput
   location: LocationCreateOneWithoutUserInput
   bookings: BookingCreateManyWithoutBookeeInput
@@ -9198,10 +9234,13 @@ input UserCreateWithoutSentMessagesInput {
   lastName: String!
   email: String!
   password: String!
+  resetToken: String
+  resetTokenExpiry: String
   phone: String!
   responseRate: Float
   responseTime: Int
   isSuperHost: Boolean
+  permission: UserCreatepermissionInput
   ownedPlaces: PlaceCreateManyWithoutHostInput
   location: LocationCreateOneWithoutUserInput
   bookings: BookingCreateManyWithoutBookeeInput
@@ -9236,6 +9275,10 @@ enum UserOrderByInput {
   email_DESC
   password_ASC
   password_DESC
+  resetToken_ASC
+  resetToken_DESC
+  resetTokenExpiry_ASC
+  resetTokenExpiry_DESC
   phone_ASC
   phone_DESC
   responseRate_ASC
@@ -9254,6 +9297,9 @@ type UserPreviousValues {
   lastName: String!
   email: String!
   password: String!
+  resetToken: String
+  resetTokenExpiry: String
+  permission: [PERMISSION!]!
   phone: String!
   responseRate: Float
   responseTime: Int
@@ -9304,10 +9350,13 @@ input UserUpdateInput {
   lastName: String
   email: String
   password: String
+  resetToken: String
+  resetTokenExpiry: String
   phone: String
   responseRate: Float
   responseTime: Int
   isSuperHost: Boolean
+  permission: UserUpdatepermissionInput
   ownedPlaces: PlaceUpdateManyWithoutHostInput
   location: LocationUpdateOneWithoutUserInput
   bookings: BookingUpdateManyWithoutBookeeInput
@@ -9324,10 +9373,13 @@ input UserUpdateManyInput {
   lastName: String
   email: String
   password: String
+  resetToken: String
+  resetTokenExpiry: String
   phone: String
   responseRate: Float
   responseTime: Int
   isSuperHost: Boolean
+  permission: UserUpdatepermissionInput
 }
 
 input UserUpdateOneRequiredWithoutBookingsInput {
@@ -9388,15 +9440,22 @@ input UserUpdateOneWithoutLocationInput {
   upsert: UserUpsertWithoutLocationInput
 }
 
+input UserUpdatepermissionInput {
+  set: [PERMISSION!]
+}
+
 input UserUpdateWithoutBookingsDataInput {
   firstName: String
   lastName: String
   email: String
   password: String
+  resetToken: String
+  resetTokenExpiry: String
   phone: String
   responseRate: Float
   responseTime: Int
   isSuperHost: Boolean
+  permission: UserUpdatepermissionInput
   ownedPlaces: PlaceUpdateManyWithoutHostInput
   location: LocationUpdateOneWithoutUserInput
   paymentAccount: PaymentAccountUpdateManyWithoutUserInput
@@ -9412,10 +9471,13 @@ input UserUpdateWithoutHostingExperiencesDataInput {
   lastName: String
   email: String
   password: String
+  resetToken: String
+  resetTokenExpiry: String
   phone: String
   responseRate: Float
   responseTime: Int
   isSuperHost: Boolean
+  permission: UserUpdatepermissionInput
   ownedPlaces: PlaceUpdateManyWithoutHostInput
   location: LocationUpdateOneWithoutUserInput
   bookings: BookingUpdateManyWithoutBookeeInput
@@ -9431,10 +9493,13 @@ input UserUpdateWithoutLocationDataInput {
   lastName: String
   email: String
   password: String
+  resetToken: String
+  resetTokenExpiry: String
   phone: String
   responseRate: Float
   responseTime: Int
   isSuperHost: Boolean
+  permission: UserUpdatepermissionInput
   ownedPlaces: PlaceUpdateManyWithoutHostInput
   bookings: BookingUpdateManyWithoutBookeeInput
   paymentAccount: PaymentAccountUpdateManyWithoutUserInput
@@ -9450,10 +9515,13 @@ input UserUpdateWithoutNotificationsDataInput {
   lastName: String
   email: String
   password: String
+  resetToken: String
+  resetTokenExpiry: String
   phone: String
   responseRate: Float
   responseTime: Int
   isSuperHost: Boolean
+  permission: UserUpdatepermissionInput
   ownedPlaces: PlaceUpdateManyWithoutHostInput
   location: LocationUpdateOneWithoutUserInput
   bookings: BookingUpdateManyWithoutBookeeInput
@@ -9469,10 +9537,13 @@ input UserUpdateWithoutOwnedPlacesDataInput {
   lastName: String
   email: String
   password: String
+  resetToken: String
+  resetTokenExpiry: String
   phone: String
   responseRate: Float
   responseTime: Int
   isSuperHost: Boolean
+  permission: UserUpdatepermissionInput
   location: LocationUpdateOneWithoutUserInput
   bookings: BookingUpdateManyWithoutBookeeInput
   paymentAccount: PaymentAccountUpdateManyWithoutUserInput
@@ -9488,10 +9559,13 @@ input UserUpdateWithoutPaymentAccountDataInput {
   lastName: String
   email: String
   password: String
+  resetToken: String
+  resetTokenExpiry: String
   phone: String
   responseRate: Float
   responseTime: Int
   isSuperHost: Boolean
+  permission: UserUpdatepermissionInput
   ownedPlaces: PlaceUpdateManyWithoutHostInput
   location: LocationUpdateOneWithoutUserInput
   bookings: BookingUpdateManyWithoutBookeeInput
@@ -9507,10 +9581,13 @@ input UserUpdateWithoutReceivedMessagesDataInput {
   lastName: String
   email: String
   password: String
+  resetToken: String
+  resetTokenExpiry: String
   phone: String
   responseRate: Float
   responseTime: Int
   isSuperHost: Boolean
+  permission: UserUpdatepermissionInput
   ownedPlaces: PlaceUpdateManyWithoutHostInput
   location: LocationUpdateOneWithoutUserInput
   bookings: BookingUpdateManyWithoutBookeeInput
@@ -9526,10 +9603,13 @@ input UserUpdateWithoutSentMessagesDataInput {
   lastName: String
   email: String
   password: String
+  resetToken: String
+  resetTokenExpiry: String
   phone: String
   responseRate: Float
   responseTime: Int
   isSuperHost: Boolean
+  permission: UserUpdatepermissionInput
   ownedPlaces: PlaceUpdateManyWithoutHostInput
   location: LocationUpdateOneWithoutUserInput
   bookings: BookingUpdateManyWithoutBookeeInput
@@ -9833,6 +9913,86 @@ input UserWhereInput {
 
   """All values not ending with the given string."""
   password_not_ends_with: String
+  resetToken: String
+
+  """All values that are not equal to given value."""
+  resetToken_not: String
+
+  """All values that are contained in given list."""
+  resetToken_in: [String!]
+
+  """All values that are not contained in given list."""
+  resetToken_not_in: [String!]
+
+  """All values less than the given value."""
+  resetToken_lt: String
+
+  """All values less than or equal the given value."""
+  resetToken_lte: String
+
+  """All values greater than the given value."""
+  resetToken_gt: String
+
+  """All values greater than or equal the given value."""
+  resetToken_gte: String
+
+  """All values containing the given string."""
+  resetToken_contains: String
+
+  """All values not containing the given string."""
+  resetToken_not_contains: String
+
+  """All values starting with the given string."""
+  resetToken_starts_with: String
+
+  """All values not starting with the given string."""
+  resetToken_not_starts_with: String
+
+  """All values ending with the given string."""
+  resetToken_ends_with: String
+
+  """All values not ending with the given string."""
+  resetToken_not_ends_with: String
+  resetTokenExpiry: String
+
+  """All values that are not equal to given value."""
+  resetTokenExpiry_not: String
+
+  """All values that are contained in given list."""
+  resetTokenExpiry_in: [String!]
+
+  """All values that are not contained in given list."""
+  resetTokenExpiry_not_in: [String!]
+
+  """All values less than the given value."""
+  resetTokenExpiry_lt: String
+
+  """All values less than or equal the given value."""
+  resetTokenExpiry_lte: String
+
+  """All values greater than the given value."""
+  resetTokenExpiry_gt: String
+
+  """All values greater than or equal the given value."""
+  resetTokenExpiry_gte: String
+
+  """All values containing the given string."""
+  resetTokenExpiry_contains: String
+
+  """All values not containing the given string."""
+  resetTokenExpiry_not_contains: String
+
+  """All values starting with the given string."""
+  resetTokenExpiry_starts_with: String
+
+  """All values not starting with the given string."""
+  resetTokenExpiry_not_starts_with: String
+
+  """All values ending with the given string."""
+  resetTokenExpiry_ends_with: String
+
+  """All values not ending with the given string."""
+  resetTokenExpiry_not_ends_with: String
   phone: String
 
   """All values that are not equal to given value."""

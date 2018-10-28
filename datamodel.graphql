@@ -6,6 +6,9 @@ type User {
   lastName: String!
   email: String! @unique
   password: String!
+  resetToken: String
+  resetTokenExpiry: String
+  permission: [PERMISSION]
   phone: String!
   responseRate: Float
   responseTime: Int
@@ -293,6 +296,11 @@ type Restaurant {
   isCurated: Boolean! @default(value: "true")
   slug: String!
   popularity: Int!
+}
+
+enum PERMISSION {
+  ADMIN
+  USER
 }
 
 enum CURRENCY {
