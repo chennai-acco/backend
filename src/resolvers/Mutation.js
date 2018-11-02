@@ -29,19 +29,23 @@ const mutations = {
     return user
   },
 
-  async login(parent, { email, password }, ctx) {
+  async signin(parent, { email, password }, ctx) {
     const user = await ctx.db.query.user({ where: { email } })
-    const valid = await bcrypt.compare(password, user ? user.password : '')
+    if (!user) {
+      throw new Error(`No such user found for email ${email}`)
+    }
 
-    if (!valid || !user) {
-      throw new Error('Invalid credentials')
+    const valid = await bcrypt.compare(password, user.password)
+    if (!valid) {
+      throw new Error('Invalid password')
     }
 
     const token = jwt.sign({ userId: user.id }, process.env.APP_SECRET)
-    return {
-      token,
-      user
-    }
+    ctx.response.cookie('token', token, {
+      httpOnly: true,
+      maxAge: 1000 * 60 * 60 * 24 * 365
+    })
+    return user
   },
 
   async createProperty(parent, args, ctx, info) {
