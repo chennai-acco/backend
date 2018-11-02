@@ -22,6 +22,12 @@ type Mutation {
   ): User!
   signin(email: String!, password: String!): User!
   signout: SuccessMessage
+  requestReset(email: String!): SuccessMessage
+  resetPassword(
+    resetToken: String!
+    password: String!
+    confirmPassword: String!
+  ): User!
 
   # Property
   createProperty(data: PropertyInput): Place!
@@ -107,12 +113,15 @@ input PropertyInput {
   pricing: PricingInput!
 }
 
-type AuthPayload {
-  token: String!
-  user: User!
-}
-
 type Viewer {
   me: User!
   bookings: [Booking!]!
+}
+
+type User {
+  id: ID!
+  firstName: String!
+  lastName: String!
+  email: String!
+  permission: [PERMISSION!]!
 }

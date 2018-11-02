@@ -1,5 +1,5 @@
 # source: https://eu1.prisma.sh/vimalraj-selvam-a2323f/chennai-acco-backend/dev
-# timestamp: Sun Oct 28 2018 23:14:21 GMT+0800 (Singapore Standard Time)
+# timestamp: Sat Nov 03 2018 00:01:21 GMT+0800 (Singapore Standard Time)
 
 type AggregateAmenities {
   count: Int!
@@ -465,7 +465,7 @@ input AmenitiesUpdateInput {
   place: PlaceUpdateOneRequiredWithoutAmenitiesInput
 }
 
-input AmenitiesUpdateManyInput {
+input AmenitiesUpdateManyMutationInput {
   elevator: Boolean
   petsAllowed: Boolean
   internet: Boolean
@@ -924,7 +924,7 @@ input BookingUpdateInput {
   payment: PaymentUpdateOneWithoutBookingInput
 }
 
-input BookingUpdateManyInput {
+input BookingUpdateManyMutationInput {
   startDate: DateTime
   endDate: DateTime
 }
@@ -1225,7 +1225,7 @@ input CityUpdateInput {
   neighbourhoods: NeighbourhoodUpdateManyWithoutCityInput
 }
 
-input CityUpdateManyInput {
+input CityUpdateManyMutationInput {
   name: String
 }
 
@@ -1493,7 +1493,7 @@ input CreditCardInformationUpdateInput {
   paymentAccount: PaymentAccountUpdateOneWithoutCreditcardInput
 }
 
-input CreditCardInformationUpdateManyInput {
+input CreditCardInformationUpdateManyMutationInput {
   cardNumber: String
   expiresOnMonth: Int
   expiresOnYear: Int
@@ -2016,7 +2016,7 @@ input ExperienceCategoryUpdateInput {
   experience: ExperienceUpdateOneWithoutCategoryInput
 }
 
-input ExperienceCategoryUpdateManyInput {
+input ExperienceCategoryUpdateManyMutationInput {
   mainColor: String
   name: String
 }
@@ -2338,7 +2338,7 @@ input ExperienceUpdateInput {
   preview: PictureUpdateOneRequiredInput
 }
 
-input ExperienceUpdateManyInput {
+input ExperienceUpdateManyMutationInput {
   title: String
   pricePerPerson: Int
   popularity: Int
@@ -2705,7 +2705,7 @@ input GuestRequirementsUpdateInput {
   place: PlaceUpdateOneRequiredWithoutGuestRequirementsInput
 }
 
-input GuestRequirementsUpdateManyInput {
+input GuestRequirementsUpdateManyMutationInput {
   govIssuedId: Boolean
   recommendationsFromOtherHosts: Boolean
   guestTripInformation: Boolean
@@ -2934,7 +2934,7 @@ input HouseRulesUpdateInput {
   additionalRules: String
 }
 
-input HouseRulesUpdateManyInput {
+input HouseRulesUpdateManyMutationInput {
   suitableForChildren: Boolean
   suitableForInfants: Boolean
   petsAllowed: Boolean
@@ -3316,7 +3316,7 @@ input LocationUpdateInput {
   restaurant: RestaurantUpdateOneWithoutLocationInput
 }
 
-input LocationUpdateManyInput {
+input LocationUpdateManyMutationInput {
   lat: Float
   lng: Float
   address: String
@@ -3761,7 +3761,7 @@ input MessageUpdateInput {
   to: UserUpdateOneRequiredWithoutReceivedMessagesInput
 }
 
-input MessageUpdateManyInput {
+input MessageUpdateManyMutationInput {
   deliveredAt: DateTime
   readAt: DateTime
 }
@@ -4034,29 +4034,29 @@ type Mutation {
   upsertRestaurant(where: RestaurantWhereUniqueInput!, create: RestaurantCreateInput!, update: RestaurantUpdateInput!): Restaurant!
   upsertPicture(where: PictureWhereUniqueInput!, create: PictureCreateInput!, update: PictureUpdateInput!): Picture!
   upsertHouseRules(where: HouseRulesWhereUniqueInput!, create: HouseRulesCreateInput!, update: HouseRulesUpdateInput!): HouseRules!
-  updateManyUsers(data: UserUpdateManyInput!, where: UserWhereInput): BatchPayload!
-  updateManyPlaces(data: PlaceUpdateManyInput!, where: PlaceWhereInput): BatchPayload!
-  updateManyPricings(data: PricingUpdateManyInput!, where: PricingWhereInput): BatchPayload!
-  updateManyGuestRequirementses(data: GuestRequirementsUpdateManyInput!, where: GuestRequirementsWhereInput): BatchPayload!
-  updateManyPolicieses(data: PoliciesUpdateManyInput!, where: PoliciesWhereInput): BatchPayload!
-  updateManyViewses(data: ViewsUpdateManyInput!, where: ViewsWhereInput): BatchPayload!
-  updateManyLocations(data: LocationUpdateManyInput!, where: LocationWhereInput): BatchPayload!
-  updateManyNeighbourhoods(data: NeighbourhoodUpdateManyInput!, where: NeighbourhoodWhereInput): BatchPayload!
-  updateManyCities(data: CityUpdateManyInput!, where: CityWhereInput): BatchPayload!
-  updateManyExperiences(data: ExperienceUpdateManyInput!, where: ExperienceWhereInput): BatchPayload!
-  updateManyExperienceCategories(data: ExperienceCategoryUpdateManyInput!, where: ExperienceCategoryWhereInput): BatchPayload!
-  updateManyAmenitieses(data: AmenitiesUpdateManyInput!, where: AmenitiesWhereInput): BatchPayload!
-  updateManyReviews(data: ReviewUpdateManyInput!, where: ReviewWhereInput): BatchPayload!
-  updateManyBookings(data: BookingUpdateManyInput!, where: BookingWhereInput): BatchPayload!
-  updateManyPayments(data: PaymentUpdateManyInput!, where: PaymentWhereInput): BatchPayload!
-  updateManyPaymentAccounts(data: PaymentAccountUpdateManyInput!, where: PaymentAccountWhereInput): BatchPayload!
-  updateManyPaypalInformations(data: PaypalInformationUpdateManyInput!, where: PaypalInformationWhereInput): BatchPayload!
-  updateManyCreditCardInformations(data: CreditCardInformationUpdateManyInput!, where: CreditCardInformationWhereInput): BatchPayload!
-  updateManyMessages(data: MessageUpdateManyInput!, where: MessageWhereInput): BatchPayload!
-  updateManyNotifications(data: NotificationUpdateManyInput!, where: NotificationWhereInput): BatchPayload!
-  updateManyRestaurants(data: RestaurantUpdateManyInput!, where: RestaurantWhereInput): BatchPayload!
-  updateManyPictures(data: PictureUpdateManyInput!, where: PictureWhereInput): BatchPayload!
-  updateManyHouseRuleses(data: HouseRulesUpdateManyInput!, where: HouseRulesWhereInput): BatchPayload!
+  updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
+  updateManyPlaces(data: PlaceUpdateManyMutationInput!, where: PlaceWhereInput): BatchPayload!
+  updateManyPricings(data: PricingUpdateManyMutationInput!, where: PricingWhereInput): BatchPayload!
+  updateManyGuestRequirementses(data: GuestRequirementsUpdateManyMutationInput!, where: GuestRequirementsWhereInput): BatchPayload!
+  updateManyPolicieses(data: PoliciesUpdateManyMutationInput!, where: PoliciesWhereInput): BatchPayload!
+  updateManyViewses(data: ViewsUpdateManyMutationInput!, where: ViewsWhereInput): BatchPayload!
+  updateManyLocations(data: LocationUpdateManyMutationInput!, where: LocationWhereInput): BatchPayload!
+  updateManyNeighbourhoods(data: NeighbourhoodUpdateManyMutationInput!, where: NeighbourhoodWhereInput): BatchPayload!
+  updateManyCities(data: CityUpdateManyMutationInput!, where: CityWhereInput): BatchPayload!
+  updateManyExperiences(data: ExperienceUpdateManyMutationInput!, where: ExperienceWhereInput): BatchPayload!
+  updateManyExperienceCategories(data: ExperienceCategoryUpdateManyMutationInput!, where: ExperienceCategoryWhereInput): BatchPayload!
+  updateManyAmenitieses(data: AmenitiesUpdateManyMutationInput!, where: AmenitiesWhereInput): BatchPayload!
+  updateManyReviews(data: ReviewUpdateManyMutationInput!, where: ReviewWhereInput): BatchPayload!
+  updateManyBookings(data: BookingUpdateManyMutationInput!, where: BookingWhereInput): BatchPayload!
+  updateManyPayments(data: PaymentUpdateManyMutationInput!, where: PaymentWhereInput): BatchPayload!
+  updateManyPaymentAccounts(data: PaymentAccountUpdateManyMutationInput!, where: PaymentAccountWhereInput): BatchPayload!
+  updateManyPaypalInformations(data: PaypalInformationUpdateManyMutationInput!, where: PaypalInformationWhereInput): BatchPayload!
+  updateManyCreditCardInformations(data: CreditCardInformationUpdateManyMutationInput!, where: CreditCardInformationWhereInput): BatchPayload!
+  updateManyMessages(data: MessageUpdateManyMutationInput!, where: MessageWhereInput): BatchPayload!
+  updateManyNotifications(data: NotificationUpdateManyMutationInput!, where: NotificationWhereInput): BatchPayload!
+  updateManyRestaurants(data: RestaurantUpdateManyMutationInput!, where: RestaurantWhereInput): BatchPayload!
+  updateManyPictures(data: PictureUpdateManyMutationInput!, where: PictureWhereInput): BatchPayload!
+  updateManyHouseRuleses(data: HouseRulesUpdateManyMutationInput!, where: HouseRulesWhereInput): BatchPayload!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
   deleteManyPlaces(where: PlaceWhereInput): BatchPayload!
   deleteManyPricings(where: PricingWhereInput): BatchPayload!
@@ -4230,7 +4230,7 @@ input NeighbourhoodUpdateInput {
   city: CityUpdateOneRequiredWithoutNeighbourhoodsInput
 }
 
-input NeighbourhoodUpdateManyInput {
+input NeighbourhoodUpdateManyMutationInput {
   name: String
   slug: String
   featured: Boolean
@@ -4584,7 +4584,7 @@ input NotificationUpdateInput {
   user: UserUpdateOneRequiredWithoutNotificationsInput
 }
 
-input NotificationUpdateManyInput {
+input NotificationUpdateManyMutationInput {
   type: NOTIFICATION_TYPE
   link: String
   readDate: DateTime
@@ -4945,7 +4945,7 @@ input PaymentAccountUpdateInput {
   creditcard: CreditCardInformationUpdateOneWithoutPaymentAccountInput
 }
 
-input PaymentAccountUpdateManyInput {
+input PaymentAccountUpdateManyMutationInput {
   type: PAYMENT_PROVIDER
 }
 
@@ -5249,7 +5249,7 @@ input PaymentUpdateInput {
   paymentMethod: PaymentAccountUpdateOneRequiredWithoutPaymentsInput
 }
 
-input PaymentUpdateManyInput {
+input PaymentUpdateManyMutationInput {
   serviceFee: Float
   placePrice: Float
   totalPrice: Float
@@ -5549,7 +5549,7 @@ input PaypalInformationUpdateInput {
   paymentAccount: PaymentAccountUpdateOneRequiredWithoutPaypalInput
 }
 
-input PaypalInformationUpdateManyInput {
+input PaypalInformationUpdateManyMutationInput {
   email: String
 }
 
@@ -5815,6 +5815,10 @@ input PictureUpdateManyInput {
   delete: [PictureWhereUniqueInput!]
   update: [PictureUpdateWithWhereUniqueNestedInput!]
   upsert: [PictureUpsertWithWhereUniqueNestedInput!]
+}
+
+input PictureUpdateManyMutationInput {
+  url: String
 }
 
 input PictureUpdateManyWithoutPlaceInput {
@@ -6434,7 +6438,7 @@ input PlaceUpdateInput {
   pictures: PictureUpdateManyWithoutPlaceInput
 }
 
-input PlaceUpdateManyInput {
+input PlaceUpdateManyMutationInput {
   name: String
   size: PLACE_SIZES
   shortDescription: String
@@ -7276,7 +7280,7 @@ input PoliciesUpdateInput {
   place: PlaceUpdateOneRequiredWithoutPoliciesInput
 }
 
-input PoliciesUpdateManyInput {
+input PoliciesUpdateManyMutationInput {
   checkInStartTime: Float
   checkInEndTime: Float
   checkoutTime: Float
@@ -7644,7 +7648,7 @@ input PricingUpdateInput {
   place: PlaceUpdateOneRequiredWithoutPricingInput
 }
 
-input PricingUpdateManyInput {
+input PricingUpdateManyMutationInput {
   monthlyDiscount: Int
   weeklyDiscount: Int
   perNight: Int
@@ -8187,7 +8191,7 @@ input RestaurantUpdateInput {
   location: LocationUpdateOneRequiredWithoutRestaurantInput
 }
 
-input RestaurantUpdateManyInput {
+input RestaurantUpdateManyMutationInput {
   title: String
   avgPricePerPerson: Int
   isCurated: Boolean
@@ -8598,7 +8602,7 @@ input ReviewUpdateInput {
   experience: ExperienceUpdateOneWithoutReviewsInput
 }
 
-input ReviewUpdateManyInput {
+input ReviewUpdateManyMutationInput {
   text: String
   stars: Int
   accuracy: Int
@@ -8981,7 +8985,7 @@ type User implements Node {
   email: String!
   password: String!
   resetToken: String
-  resetTokenExpiry: String
+  resetTokenExpiry: Float
   permission: [PERMISSION!]!
   phone: String!
   responseRate: Float
@@ -9014,7 +9018,7 @@ input UserCreateInput {
   email: String!
   password: String!
   resetToken: String
-  resetTokenExpiry: String
+  resetTokenExpiry: Float
   phone: String!
   responseRate: Float
   responseTime: Int
@@ -9081,7 +9085,7 @@ input UserCreateWithoutBookingsInput {
   email: String!
   password: String!
   resetToken: String
-  resetTokenExpiry: String
+  resetTokenExpiry: Float
   phone: String!
   responseRate: Float
   responseTime: Int
@@ -9103,7 +9107,7 @@ input UserCreateWithoutHostingExperiencesInput {
   email: String!
   password: String!
   resetToken: String
-  resetTokenExpiry: String
+  resetTokenExpiry: Float
   phone: String!
   responseRate: Float
   responseTime: Int
@@ -9125,7 +9129,7 @@ input UserCreateWithoutLocationInput {
   email: String!
   password: String!
   resetToken: String
-  resetTokenExpiry: String
+  resetTokenExpiry: Float
   phone: String!
   responseRate: Float
   responseTime: Int
@@ -9147,7 +9151,7 @@ input UserCreateWithoutNotificationsInput {
   email: String!
   password: String!
   resetToken: String
-  resetTokenExpiry: String
+  resetTokenExpiry: Float
   phone: String!
   responseRate: Float
   responseTime: Int
@@ -9169,7 +9173,7 @@ input UserCreateWithoutOwnedPlacesInput {
   email: String!
   password: String!
   resetToken: String
-  resetTokenExpiry: String
+  resetTokenExpiry: Float
   phone: String!
   responseRate: Float
   responseTime: Int
@@ -9191,7 +9195,7 @@ input UserCreateWithoutPaymentAccountInput {
   email: String!
   password: String!
   resetToken: String
-  resetTokenExpiry: String
+  resetTokenExpiry: Float
   phone: String!
   responseRate: Float
   responseTime: Int
@@ -9213,7 +9217,7 @@ input UserCreateWithoutReceivedMessagesInput {
   email: String!
   password: String!
   resetToken: String
-  resetTokenExpiry: String
+  resetTokenExpiry: Float
   phone: String!
   responseRate: Float
   responseTime: Int
@@ -9235,7 +9239,7 @@ input UserCreateWithoutSentMessagesInput {
   email: String!
   password: String!
   resetToken: String
-  resetTokenExpiry: String
+  resetTokenExpiry: Float
   phone: String!
   responseRate: Float
   responseTime: Int
@@ -9298,7 +9302,7 @@ type UserPreviousValues {
   email: String!
   password: String!
   resetToken: String
-  resetTokenExpiry: String
+  resetTokenExpiry: Float
   permission: [PERMISSION!]!
   phone: String!
   responseRate: Float
@@ -9351,7 +9355,7 @@ input UserUpdateInput {
   email: String
   password: String
   resetToken: String
-  resetTokenExpiry: String
+  resetTokenExpiry: Float
   phone: String
   responseRate: Float
   responseTime: Int
@@ -9368,13 +9372,13 @@ input UserUpdateInput {
   hostingExperiences: ExperienceUpdateManyWithoutHostInput
 }
 
-input UserUpdateManyInput {
+input UserUpdateManyMutationInput {
   firstName: String
   lastName: String
   email: String
   password: String
   resetToken: String
-  resetTokenExpiry: String
+  resetTokenExpiry: Float
   phone: String
   responseRate: Float
   responseTime: Int
@@ -9450,7 +9454,7 @@ input UserUpdateWithoutBookingsDataInput {
   email: String
   password: String
   resetToken: String
-  resetTokenExpiry: String
+  resetTokenExpiry: Float
   phone: String
   responseRate: Float
   responseTime: Int
@@ -9472,7 +9476,7 @@ input UserUpdateWithoutHostingExperiencesDataInput {
   email: String
   password: String
   resetToken: String
-  resetTokenExpiry: String
+  resetTokenExpiry: Float
   phone: String
   responseRate: Float
   responseTime: Int
@@ -9494,7 +9498,7 @@ input UserUpdateWithoutLocationDataInput {
   email: String
   password: String
   resetToken: String
-  resetTokenExpiry: String
+  resetTokenExpiry: Float
   phone: String
   responseRate: Float
   responseTime: Int
@@ -9516,7 +9520,7 @@ input UserUpdateWithoutNotificationsDataInput {
   email: String
   password: String
   resetToken: String
-  resetTokenExpiry: String
+  resetTokenExpiry: Float
   phone: String
   responseRate: Float
   responseTime: Int
@@ -9538,7 +9542,7 @@ input UserUpdateWithoutOwnedPlacesDataInput {
   email: String
   password: String
   resetToken: String
-  resetTokenExpiry: String
+  resetTokenExpiry: Float
   phone: String
   responseRate: Float
   responseTime: Int
@@ -9560,7 +9564,7 @@ input UserUpdateWithoutPaymentAccountDataInput {
   email: String
   password: String
   resetToken: String
-  resetTokenExpiry: String
+  resetTokenExpiry: Float
   phone: String
   responseRate: Float
   responseTime: Int
@@ -9582,7 +9586,7 @@ input UserUpdateWithoutReceivedMessagesDataInput {
   email: String
   password: String
   resetToken: String
-  resetTokenExpiry: String
+  resetTokenExpiry: Float
   phone: String
   responseRate: Float
   responseTime: Int
@@ -9604,7 +9608,7 @@ input UserUpdateWithoutSentMessagesDataInput {
   email: String
   password: String
   resetToken: String
-  resetTokenExpiry: String
+  resetTokenExpiry: Float
   phone: String
   responseRate: Float
   responseTime: Int
@@ -9953,46 +9957,28 @@ input UserWhereInput {
 
   """All values not ending with the given string."""
   resetToken_not_ends_with: String
-  resetTokenExpiry: String
+  resetTokenExpiry: Float
 
   """All values that are not equal to given value."""
-  resetTokenExpiry_not: String
+  resetTokenExpiry_not: Float
 
   """All values that are contained in given list."""
-  resetTokenExpiry_in: [String!]
+  resetTokenExpiry_in: [Float!]
 
   """All values that are not contained in given list."""
-  resetTokenExpiry_not_in: [String!]
+  resetTokenExpiry_not_in: [Float!]
 
   """All values less than the given value."""
-  resetTokenExpiry_lt: String
+  resetTokenExpiry_lt: Float
 
   """All values less than or equal the given value."""
-  resetTokenExpiry_lte: String
+  resetTokenExpiry_lte: Float
 
   """All values greater than the given value."""
-  resetTokenExpiry_gt: String
+  resetTokenExpiry_gt: Float
 
   """All values greater than or equal the given value."""
-  resetTokenExpiry_gte: String
-
-  """All values containing the given string."""
-  resetTokenExpiry_contains: String
-
-  """All values not containing the given string."""
-  resetTokenExpiry_not_contains: String
-
-  """All values starting with the given string."""
-  resetTokenExpiry_starts_with: String
-
-  """All values not starting with the given string."""
-  resetTokenExpiry_not_starts_with: String
-
-  """All values ending with the given string."""
-  resetTokenExpiry_ends_with: String
-
-  """All values not ending with the given string."""
-  resetTokenExpiry_not_ends_with: String
+  resetTokenExpiry_gte: Float
   phone: String
 
   """All values that are not equal to given value."""
@@ -10210,7 +10196,7 @@ input ViewsUpdateInput {
   place: PlaceUpdateOneRequiredWithoutViewsInput
 }
 
-input ViewsUpdateManyInput {
+input ViewsUpdateManyMutationInput {
   lastWeek: Int
 }
 
