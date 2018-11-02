@@ -1,5 +1,9 @@
 # import * from "./generated/prisma.graphql"
 
+type SuccessMessage {
+  message: String
+}
+
 type Query {
   viewer: Viewer
   places: [Place]!
@@ -17,6 +21,9 @@ type Mutation {
     phone: String!
   ): User!
   signin(email: String!, password: String!): User!
+  signout: SuccessMessage
+
+  # Property
   createProperty(data: PropertyInput): Place!
   createPicture(data: PictureCreateInput!): Picture!
 }

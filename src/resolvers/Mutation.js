@@ -48,6 +48,13 @@ const mutations = {
     return user
   },
 
+  async signout(parent, args, ctx, info) {
+    ctx.response.clearCookie('token')
+    return {
+      message: 'Goodbye!'
+    }
+  },
+
   async createProperty(parent, args, ctx, info) {
     const { data } = args
     const { amenities, pricing, location, host, ...rest } = data
