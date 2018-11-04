@@ -9,6 +9,7 @@ type Query {
   places: [Place]!
   place(where: PlaceWhereUniqueInput!): Place
   me: User
+  users: [User]!
 }
 
 type Mutation {

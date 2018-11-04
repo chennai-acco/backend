@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken')
 
 function hasPermission(user, permissionsNeeded) {
-  const matchedPermissions = user.permissions.filter(permissionTheyHave =>
+  const matchedPermissions = user.permission.filter(permissionTheyHave =>
     permissionsNeeded.includes(permissionTheyHave)
   )
   if (!matchedPermissions.length) {
@@ -11,7 +11,7 @@ function hasPermission(user, permissionsNeeded) {
 
       You Have:
 
-      ${user.permissions}
+      ${user.permission}
       `)
   }
 }
