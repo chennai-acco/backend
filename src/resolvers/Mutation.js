@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken')
 const { forwardTo } = require('prisma-binding')
 const { randomBytes } = require('crypto')
 const { promisify } = require('util')
+const { transport, makeNiceEmail } = require('../mail')
 
 const mutations = {
   async signup(parent, args, ctx, info) {
@@ -107,7 +108,18 @@ const mutations = {
       where: { email: args.email },
       data: { resetToken, resetTokenExpiry }
     })
-    // Todo: Email the reset token
+
+    // Email the reset token
+    const mailRes = await transport.sendMail({
+      from: 'no-reply@chennaiacco.com',
+      to: user.email,
+      subject: 'Your password reset token',
+      html: makeNiceEmail(
+        `You password reset token is here! \n\n <a href="${
+          process.env.FRONTEND_URL
+        }/reset?resetToken=${resetToken}">Click here to reset</a>`
+      )
+    })
 
     return { message: 'Thanks!' }
   },
