@@ -107,7 +107,6 @@ input PropertyInput {
   numBeds: Int!
   numBaths: Int!
   popularity: Int!
-  host: ID!
   amenities: AmenitiesInput!
   location: LocationInput!
   pricing: PricingInput!

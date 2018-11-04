@@ -64,7 +64,7 @@ const mutations = {
     }
 
     const { data } = args
-    const { amenities, pricing, location, host, ...rest } = data
+    const { amenities, pricing, location, ...rest } = data
 
     const result = await ctx.db.mutation.createPlace(
       {
@@ -72,7 +72,7 @@ const mutations = {
           ...rest,
           host: {
             connect: {
-              id: host
+              id: ctx.request.userId
             }
           },
           amenities: {
