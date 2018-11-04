@@ -59,6 +59,10 @@ const mutations = {
   },
 
   async createProperty(parent, args, ctx, info) {
+    if (!ctx.request.userId) {
+      throw new Error('You must be logged in to do that!')
+    }
+
     const { data } = args
     const { amenities, pricing, location, host, ...rest } = data
 
